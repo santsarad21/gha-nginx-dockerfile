@@ -22,26 +22,26 @@ jobs:
 
     steps:
       - name: checkout repository 
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with: 
           token: ${{secrets.USER_GITHUB_TOKEN}}
 
-      - name: Login to DockerHub
-        uses: docker/login-action@v2
+      - name: Login to Docker Hub
+        uses: docker/login-action@v
         with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
+            username: ${{ secrets.DOCKERHUB_USERNAME }}
+            password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Setup Docker BuildX
-        uses: docker/setup-buildx-action@v2
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
 
       - name: Build Image and Push to DockerHub
-        uses: docker/build-push-action@
+        uses: docker/build-push-action@v5
         with:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.GITHUB_TOKEN}}/nginx-ubuntu:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/nginx-ubuntu:latest
 
 
       
