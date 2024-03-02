@@ -41,7 +41,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ${{ secrets.DOCKERHUB_USERNAME }}/nginx-ubuntu
+          images: ${{ secrets.DOCKERHUB_USERNAME }}/gha-nginx-dockerfile
           tags: |
             type=ref,event=branch
             type=ref,event=pr
