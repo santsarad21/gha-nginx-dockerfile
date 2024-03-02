@@ -43,7 +43,7 @@ jobs:
         with:
           images: ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}
           tags: |
-            type=semver,pattern={{raw}}
+            type=semver,pattern={{version}}
 
       - name: Build Image and Push to DockerHub
         uses: docker/build-push-action@v5
