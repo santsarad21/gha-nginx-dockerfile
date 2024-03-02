@@ -5,8 +5,8 @@ on:
     branches:
       - "main"
     ## Don't run Github Workflow if changes made to under 'src' folder. 
-    paths-ignore:  
-      - "src/*"
+    # paths-ignore:  
+    #   - "src/*"
     ## Trigger Github Workflow when megre request made to main branch
   pull_request:
     branches:
