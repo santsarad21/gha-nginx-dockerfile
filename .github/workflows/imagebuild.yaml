@@ -43,10 +43,10 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: ${{ secrets.DOCKERHUB_USERNAME }}/gha-nginx-dockerfile
-          tags: |
-            type=ref,event=branch,pattern={{version}}
-            # type=semver,pattern=
-            # type=semver,pattern={{major}}.{{minor}}
+          # tags: |
+          #   type=ref,event=branch,pattern={{version}}
+          #   # type=semver,pattern=
+          #   # type=semver,pattern={{major}}.{{minor}}
 
       - name: Build Image and Push to DockerHub
         uses: docker/build-push-action@v5
