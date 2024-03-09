@@ -44,7 +44,6 @@ jobs:
         with:
           images: ${{ secrets.DOCKERHUB_USERNAME }}/gha-nginx-dockerfile
           tags: |
-            type=ref,event=tag
             type=semver,pattern={{ raw }}
 
       - name: Build Image and Push to DockerHub
@@ -52,7 +51,7 @@ jobs:
         with:
           context: .
           file: ./Dockerfile
-          push: true
+          push: false
           #tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.repository.name }}:latest
           # ##tags: ${{ secrets.DOCKERHUB_USERNAME }}/nginx-ubuntu:latest
           tags: ${{ steps.meta.outputs.tags }}
