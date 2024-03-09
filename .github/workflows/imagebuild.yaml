@@ -5,7 +5,7 @@ on:
     branches:
       - "main"
     tags:
-      - 'v*'
+      - '*'
     ## Don't run Github Workflow if changes made to under 'src' folder. 
     # paths-ignore:  
     #   - "src/*"
