@@ -44,12 +44,7 @@ jobs:
         with:
           images: ${{ secrets.DOCKERHUB_USERNAME }}/gha-nginx-dockerfile
           tags: |
-            type=ref,event=branch
-            type=ref,event=pr
-            type=semver,pattern={{version}}
-            type=semver,pattern={{major}}.{{minor}}
-            type=sha
-
+            type=semver,pattern={{ raw }}
       # -
       #   name: testing metadata
       #   id: metadata
