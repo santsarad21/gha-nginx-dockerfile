@@ -40,12 +40,12 @@ jobs:
 
       - name: Extract metedata for the Docker image 
         id: meta
-        uses: docker/metadata-action@v5
+        uses: docker/metadata-action@v5.5.1
         with:
-          images: ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.repository.name }}
+          images: ${{ secrets.DOCKERHUB_USERNAME }}//gha-nginx-dockerfile
           tags: |
-            type=ref,event=tag
-            type=semver,pattern={{ raw }}
+            # type=ref,event=tag
+            type=semver,pattern={{version}},value=v1.4
 
       - name: Build Image and Push to DockerHub
         uses: docker/build-push-action@v5
@@ -53,7 +53,7 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.repository.name }}:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/gha-nginx-dockerfile:latest
           # ##tags: ${{ secrets.DOCKERHUB_USERNAME }}/nginx-ubuntu:latest
           # tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
