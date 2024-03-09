@@ -33,14 +33,14 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          context: git
+          # context: workflow
           images: ${{ secrets.DOCKERHUB_USERNAME }}/gha-nginx-dockerfile
-          flavor: |
-           latest=auto
-           prefix=true
-           suffix=true
+          # flavor: |
+          #  latest=auto
+          #  prefix=true
+          #  suffix=true
           tags: |
-            type=semver,pattern={{ raw }}
+            type=match,pattern=v(.*),group=1
           
 
       - name: Set up Docker Buildx
