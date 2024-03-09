@@ -1,63 +1,41 @@
-name: "CICD for Nginx Webapp using Dockerfile"
+name: ci
+
 on:
-    ## Trigger Github Workflow when commit made to main branch
+  workflow_dispatch:
   push:
     branches:
-      - "main"
+      - 'main'
     tags:
       - 'v*'
-    ## Don't run Github Workflow if changes made to under 'src' folder. 
-    # paths-ignore:  
-    #   - "src/*"
-    ## Trigger Github Workflow when megre request made to main branch
   pull_request:
     branches:
-      - "main"
-
-permissions:
-  contents: read
+      - 'main'
 
 jobs:
-  nginx-image-build: 
+  docker:
     runs-on: ubuntu-latest
-    environment: production
-
     steps:
-      - name: checkout repository 
+      -
+        name: Checkout
         uses: actions/checkout@v4
-        with: 
-          token: ${{secrets.USER_GITHUB_TOKEN}}
-          fetch-depth: 0
-
-      - name: Login to Docker Hub
-        uses: docker/login-action@v3
-        with:
-            username: ${{ secrets.DOCKERHUB_USERNAME }}
-            password: ${{ secrets.DOCKERHUB_TOKEN }}
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-
-      - name: Extract metedata for the Docker image 
+      -
+        name: Docker meta
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ${{ secrets.DOCKERHUB_USERNAME }}/gha-nginx-dockerfile
-          tags: |
-            type=ref,event=tag
-            type=semver,pattern={{ raw }}
-      # -
-      #   name: testing metadata
-      #   id: metadata
-      #   uses: ahmadnassri/action-metadata@v2
-
-      - name: Build Image and Push to DockerHub
+          images: santsarad/gha-nginx-dockerfile
+      -
+        name: Login to DockerHub
+        if: github.event_name != 'pull_request'
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      -
+        name: Build and push
         uses: docker/build-push-action@v5
         with:
           context: .
-          file: ./Dockerfile
-          push: false
-          ##tags: ${{ secrets.DOCKERHUB_USERNAME }}/nginx-ubuntu:latest
+          push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-
