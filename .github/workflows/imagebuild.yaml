@@ -42,7 +42,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.repository.name }}
+          images: ${{ secrets.DOCKERHUB_USERNAME }}//gha-nginx-dockerfile
           tags: |
             type=ref,event=tag
             type=semver,pattern={{ raw }}
@@ -53,7 +53,7 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.repository.name }}:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/gha-nginx-dockerfile:latest
           # ##tags: ${{ secrets.DOCKERHUB_USERNAME }}/nginx-ubuntu:latest
           # tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
