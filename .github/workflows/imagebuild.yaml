@@ -44,8 +44,8 @@ jobs:
         with:
           images: ${{ secrets.DOCKERHUB_USERNAME }}//gha-nginx-dockerfile
           tags: |
-            type=ref,event=tag
-            type=semver,pattern={{ raw }}
+            # type=ref,event=tag
+            type=semver,pattern={{version}},value=v1.4
 
       - name: Build Image and Push to DockerHub
         uses: docker/build-push-action@v5
