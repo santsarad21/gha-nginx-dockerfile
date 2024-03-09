@@ -29,8 +29,8 @@ jobs:
           token: ${{secrets.USER_GITHUB_TOKEN}}
           fetch-depth: 0
 
-      - name: Print GitHub Ref
-        run: echo "GitHub Ref: ${{ github.ref }}"
+      # - name: Print GitHub Ref
+      #   run: echo "GitHub Ref: ${{ github.ref }}"
       
       - name: Check if it's a Tag
         run: |
