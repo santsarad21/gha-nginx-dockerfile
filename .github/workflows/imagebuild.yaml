@@ -1,11 +1,11 @@
 name: "CICD for Nginx Webapp using Dockerfile"
-on:
+on: workflow_dispatch
     ## Trigger Github Workflow when commit made to main branch
-  push:
-    # branches:
-    #   - "main"
-    tags:
-      - 'v[0-9]+.[0-9]+.[0-9]+'
+  # push:
+  #   # branches:
+  #   #   - "main"
+  #   tags:
+  #     - 'v[0-9]+.[0-9]+.[0-9]+'
     ## Don't run Github Workflow if changes made to under 'src' folder. 
     # paths-ignore:  
     #   - "src/*"
