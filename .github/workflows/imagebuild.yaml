@@ -59,7 +59,5 @@ jobs:
           push: false
           #tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.repository.name }}:latest
           # ##tags: ${{ secrets.DOCKERHUB_USERNAME }}/nginx-ubuntu:latest
-          tags: |
-            # latest
-            ${{ steps.meta.outputs.tags }}
+          tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
